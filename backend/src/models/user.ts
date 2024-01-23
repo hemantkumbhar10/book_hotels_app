@@ -5,8 +5,8 @@ export type UserType = {
     _id: string;
     email: string;
     password: string;
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
 }
 
 
@@ -20,11 +20,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    firstName: {
+    firstname: {
         type: String,
         required: true,
     },
-    lastName: {
+    lastname: {
         type: String,
         required: true,
     }

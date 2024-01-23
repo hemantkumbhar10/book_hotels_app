@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import "dotenv/config";
 import mongoose from 'mongoose';
+import userRoutes from './routes/users.routes';
 
 
 //CONNECT TO DATABASE
@@ -24,9 +25,11 @@ app.use(cors());
 
 
 //TEST ROUTE CONTROLLER
-app.get('/api/test', async (req: Request, res: Response) => {
-    res.status(200).json({ message: "Greetings from Express Backend Server!" });
-})
+// app.get('/api/test', async (req: Request, res: Response) => {
+//     res.status(200).json({ message: "Greetings from Express Backend Server!" });
+// })
+
+app.use('/api/users', userRoutes);
 
 //START SERVER
 app.listen(8080, ()=>{
