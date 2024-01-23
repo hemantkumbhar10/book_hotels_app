@@ -2,7 +2,9 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import "dotenv/config";
 import mongoose from 'mongoose';
+import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/users.routes';
+
 
 
 //CONNECT TO DATABASE
@@ -29,6 +31,10 @@ app.use(cors());
 //     res.status(200).json({ message: "Greetings from Express Backend Server!" });
 // })
 
+//LOGIN LOGOUT ROUTES
+app.use('/api/auth', authRoutes);
+
+//REGISTER USER ROUTES
 app.use('/api/users', userRoutes);
 
 //START SERVER
