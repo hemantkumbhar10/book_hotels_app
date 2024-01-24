@@ -13,7 +13,7 @@ check('password', "Password is required!").isLength({ min: 6 })
 
     const error = validationResult(req);
     if (!error.isEmpty()) {
-        return res.status(400).json({ message: error.array() });
+        return res.status(400).send({ message: error.array() });
     }
 
     const { email, password } = req.body;
@@ -23,12 +23,12 @@ check('password', "Password is required!").isLength({ min: 6 })
         const user = await User.findOne({ email });
 
         if (!user) {
-            return res.status(400).json({ message: "Invalid Credentials!" });
+            return res.status(400).send({ message: "Invalid Credentials!" });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: "Invalid Credentials!" });
+            return res.status(400).send({ message: "Invalid Credentials!" });
         }
 
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string,
@@ -40,12 +40,12 @@ check('password', "Password is required!").isLength({ min: 6 })
             maxAge: 86400000,
         })
 
-        return res.status(200).json({ userId: user._id });
+        return res.status(200).send({ userId: user._id });
 
 
     } catch (e) {
         console.log(e);
-        res.status(500).json({ message: 'Something went wrong!' })
+        res.status(500).send({ message: 'Something went wrong!' })
     }
 })
 
