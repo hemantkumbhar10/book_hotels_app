@@ -8,6 +8,8 @@ export const Register = async(formData:RegistrationFormData)=>{
     //USING SIMPLE FETCH TO EXECUTE API ROUTES
     const response = await fetch(`${BASE_BACKEND_API_URL}/api/users/register`,{
         method:'POST',
+        //TO INCLUDE COOKIES
+        credentials:"include",
         headers:{
             'Content-Type': 'application/json',
         },
