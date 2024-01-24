@@ -17,10 +17,21 @@ const Register = () => {
     const { register, watch, handleSubmit, formState: { errors } } = useForm<RegistrationFormData>();
 
     //REACT QUERY TO MANAGE SERVER STATES WITH HOOK
-    const mutation = useMutation(user.Register);
+    const mutation = useMutation(user.Register,{
+        onSuccess:()=>{
+
+            //CAN ADD GLOBAL STATE TOO WITH CONTEXT AND SHOW NOTIFICATION AT TOP HERE
+            console.log('Registration Successful!');
+        },
+        onError:(error:Error)=>{
+            console.log(error.message);
+        }
+
+    });
 
     const submitRegistrationForm = handleSubmit((data) => {
-        console.log(data);
+        // EXECUTE REACT QUERY TO HANDLE SERVER FETCH & STATES
+        mutation.mutate(data);
     })
 
     return (
