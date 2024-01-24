@@ -1,8 +1,9 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { check, validationResult } from 'express-validator';
 import User from '../models/user';
 import jwt from 'jsonwebtoken';
+import verifyToken from '../middlewares/auth.middleware';
 
 const router = express.Router();
 
@@ -48,5 +49,13 @@ check('password', "Password is required!").isLength({ min: 6 })
         res.status(500).send({ message: 'Something went wrong!' })
     }
 })
+
+
+router.get("/validate-token", verifyToken, (req:Request, res:Response)=>{
+
+    //VALIDATE TOKEN
+    // res.status(200).send({userID: req.userID});
+})
+
 
 export default router;
