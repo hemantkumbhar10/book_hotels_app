@@ -13,7 +13,7 @@ export const Register = async(formData:RegistrationFormData)=>{
         },
         body:JSON.stringify(formData),
     });
-    console.log(import.meta.env);
+   
 
     //CONVERTS RESPONSE INTO READABLE JSON FORMAT
     const responseBody = await response.json();

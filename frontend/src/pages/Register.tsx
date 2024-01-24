@@ -2,6 +2,8 @@
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import * as user from '../api/user.api';
+import { useAppContext } from '../contexts/AppContext';
+import { useNavigate } from 'react-router-dom';
 
 
 export type RegistrationFormData = {
@@ -15,16 +17,22 @@ export type RegistrationFormData = {
 const Register = () => {
 
     const { register, watch, handleSubmit, formState: { errors } } = useForm<RegistrationFormData>();
+    const navigate = useNavigate();
+
+    const {showToast} = useAppContext();
 
     //REACT QUERY TO MANAGE SERVER STATES WITH HOOK
     const mutation = useMutation(user.Register,{
         onSuccess:()=>{
 
             //CAN ADD GLOBAL STATE TOO WITH CONTEXT AND SHOW NOTIFICATION AT TOP HERE
-            console.log('Registration Successful!');
+            // console.log('Registration Successful!');
+            showToast({message:"You have registered successfully!", type:"SUCCESS"});
+            navigate("/");
         },
         onError:(error:Error)=>{
-            console.log(error.message);
+            // console.log(error.message);
+            showToast({message:error.message, type:"ERROR"});
         }
 
     });
