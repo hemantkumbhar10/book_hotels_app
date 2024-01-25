@@ -55,3 +55,14 @@ export const Login = async (loginData: LoginFormData) => {
     }
     return response_body;
 }
+
+export const Logout = async () => {
+    const response = await fetch(`${BASE_BACKEND_API_URL}/api/auth/sign-out`, {
+        credentials: 'include',
+        method: 'POST',
+    })
+
+    if (!response.ok) {
+        throw new Error('Log Out Failed!');
+    }
+}

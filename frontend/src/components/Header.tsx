@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useAppContext } from '../contexts/AppContext';
+import Logout from './Logout';
 
 const Header = () => {
 
@@ -21,7 +22,7 @@ const Header = () => {
                                 <>
                                     <Link to='/reservations'>Reservations</Link>
                                     <Link to='/favourites'>Favourites</Link>
-                                    <button>Log out</button>
+                                    <Logout/>
                                 </>
                             )
                     }
