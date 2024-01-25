@@ -30,6 +30,7 @@ const AppContextProvider = ({ children }: ProviderData) => {
     const [messageToast, setMessageToast] = useState<ToastMessageData | undefined>(undefined);
 
     //VALIDATE TOKEN AND RETURNS BOOLEAN BASED ON STATUS 200 OR 401/404/etc.
+    //CREATES QUERY WITH KEY validateToken
     const {isError} = useQuery("validateToken", user.validateToken, {
         retry:false,
     })

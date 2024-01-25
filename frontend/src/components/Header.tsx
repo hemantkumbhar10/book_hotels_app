@@ -14,16 +14,16 @@ const Header = () => {
                 </span>
                 <span className='flex flex-x-2'>
                     {
-                        !isLoggedIn ? (
-                            <Link to='/sign-in' className='bg-white flex items-center rounded-md text-purple-500 px-3 font-bold hover:bg-gray-100 hover:scale-105 transition ease-linear duration-100'>Login</Link>
+                        isLoggedIn ? (
+                            <>
+                                <Link className='flex items-center rounded-md text-white px-3 font-bold hover:bg-gray-100 hover:text-purple-500 hover:scale-105 transition ease-linear duration-100' to='/reservations'>Reservations</Link>
+                                <Link className='flex items-center rounded-md text-white px-3 font-bold hover:bg-gray-100 hover:text-purple-500 hover:scale-105 transition ease-linear duration-100'  to='/favourites'>Favourites</Link>
+                                <Logout />
+                            </>
 
                         ) :
                             (
-                                <>
-                                    <Link to='/reservations'>Reservations</Link>
-                                    <Link to='/favourites'>Favourites</Link>
-                                    <Logout/>
-                                </>
+                                <Link to='/sign-in' className='bg-white flex items-center rounded-md text-purple-500 px-3 font-bold hover:bg-gray-100 hover:scale-105 transition ease-linear duration-100'>Login</Link>
                             )
                     }
                 </span>

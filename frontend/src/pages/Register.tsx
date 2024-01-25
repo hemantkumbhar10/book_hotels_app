@@ -1,6 +1,6 @@
 // import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import * as user from '../api/user.api';
 import { useAppContext } from '../contexts/AppContext';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +18,7 @@ const Register = () => {
 
     const { register, watch, handleSubmit, formState: { errors } } = useForm<RegistrationFormData>();
     const navigate = useNavigate();
-
+    const queryClient = useQueryClient();
     const {showToast} = useAppContext();
 
     //REACT QUERY TO MANAGE SERVER STATES WITH HOOK
@@ -28,6 +28,7 @@ const Register = () => {
             //CAN ADD GLOBAL STATE TOO WITH CONTEXT AND SHOW NOTIFICATION AT TOP HERE
             // console.log('Registration Successful!');
             showToast({message:"You have registered successfully!", type:"SUCCESS"});
+            await queryClient.invalidateQueries("validateToken");
             navigate("/");
         },
         onError:(error:Error)=>{
