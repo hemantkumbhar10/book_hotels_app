@@ -27,7 +27,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
         // console.log(JSON.stringify(token_decoded) + "TOKEN DECODED");
 
         //IF VALID SET USER_ID IN REQUEST FROM PAYLOAD
-        req.userID = (token_decoded as JwtPayload).userId;
+        req.userID = (token_decoded as JwtPayload).userID;
         //CALLS NEXT FUNCTIONS AS MIDDLEWARE SUPPOSED TO
         next();
 

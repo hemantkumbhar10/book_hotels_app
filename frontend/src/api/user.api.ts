@@ -34,6 +34,5 @@ export const validateToken = async()=>{
     if(!response.ok){
         throw new Error("Token is invalid!");
     }
-    console.log("Token ---->. "+ await JSON.stringify(response));
-    return await response.json();
+    return response.json();
 }
