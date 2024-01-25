@@ -1,5 +1,7 @@
 import React, { useState, createContext, useContext, Context } from 'react';
 import ToastMessage from '../components/ToastMessage';
+import { useQuery } from 'react-query';
+import * as user from '../api/user.api';
 
 
 type ToastMessageData = {
@@ -10,6 +12,7 @@ type ToastMessageData = {
 //TYPE FOR FUNCTION WHICH TAKES MESSAGE_DATA IF THE TOAST HAS TO BE SHOWN
 type AppContextData = {
     showToast: (toastMessage: ToastMessageData) => void;
+    isLoggedIn : boolean;
 }
 
 type ProviderData = {
@@ -26,6 +29,11 @@ const AppContextProvider = ({ children }: ProviderData) => {
     //STORES TOAST DATA
     const [messageToast, setMessageToast] = useState<ToastMessageData | undefined>(undefined);
 
+    //VALIDATE TOKEN AND RETURNS BOOLEAN BASED ON STATUS 200 OR 401/404/etc.
+    const {isError} = useQuery("validateToken", user.validateToken, {
+        retry:false,
+    })
+
     return (
         <context.Provider 
         //TO PROVIDE CURRENT CONTEXT VALUE TO CHILDRENS
@@ -33,7 +41,9 @@ const AppContextProvider = ({ children }: ProviderData) => {
             //VALUE (STATE OF PROVIDER) is SET WHEN showToast EXECUTED BY HOOK
             showToast: (toastMessage) => {
                 setMessageToast(toastMessage);
-            }
+            },
+            //PASSES CURRENT VALUE OF IS_ERROR 
+            isLoggedIn:!isError,
         }}>
             {messageToast &&
                 (<ToastMessage
