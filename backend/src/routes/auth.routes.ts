@@ -53,7 +53,7 @@ check('password', "Password is required!").isLength({ min: 6 })
 
 router.get("/validate-token", verifyToken, (req:Request, res:Response)=>{
     //VALIDATE TOKEN
-    res.status(200).send({userID: req.userId});
+    res.status(200).send({userId: req.userId});
 })
 
 
