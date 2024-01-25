@@ -13,7 +13,6 @@ import userRoutes from './routes/users.routes';
 mongoose.connect(process.env.MONGO_URI as string);
 
 
-
 //CREATE NEW EXPRESS APP
 const app = express();
 
