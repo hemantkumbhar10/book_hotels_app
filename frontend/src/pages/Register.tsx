@@ -23,7 +23,7 @@ const Register = () => {
 
     //REACT QUERY TO MANAGE SERVER STATES WITH HOOK
     const mutation = useMutation(user.Register,{
-        onSuccess:()=>{
+        onSuccess:async ()=>{
 
             //CAN ADD GLOBAL STATE TOO WITH CONTEXT AND SHOW NOTIFICATION AT TOP HERE
             // console.log('Registration Successful!');
