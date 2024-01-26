@@ -5,6 +5,7 @@ import "dotenv/config";
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/users.routes';
+import path from 'path';
 
 
 
@@ -39,6 +40,8 @@ app.use(cors(
     }
 ));
 
+//SERVES STATIC FILES GENREATED IN FRONTEND THROUGH BACKEND
+app.use(express.static(path.join(__dirname,'../../frontend/dist')));
 
 //TEST ROUTE CONTROLLER
 // app.get('/api/test', async (req: Request, res: Response) => {

@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext, Context } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import ToastMessage from '../components/ToastMessage';
 import { useQuery } from 'react-query';
 import * as user from '../api/user.api';

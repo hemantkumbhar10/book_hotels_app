@@ -1,8 +1,9 @@
-import { json } from "react-router-dom";
 import { RegistrationFormData } from "../pages/Register"
 import { LoginFormData } from "../pages/Login";
 
-const BASE_BACKEND_API_URL = import.meta.env.VITE_BASE_BACKEND_API_URL;
+//AFTER BUNDLING FRONTEND AND BACKEND THERE WONT BE SEPARATE URLS 
+//HENCE  BY SPECIFFYING EMPTY STRING, WE SAYING USE SAME URL FOR BACKEND AS WELL
+const BASE_BACKEND_API_URL = import.meta.env.VITE_BASE_BACKEND_API_URL || "";
 
 
 export const Register = async (formData: RegistrationFormData) => {

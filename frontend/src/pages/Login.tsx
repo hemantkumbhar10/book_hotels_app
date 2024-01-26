@@ -12,7 +12,7 @@ export type LoginFormData = {
 
 const Login = () => {
 
-    const { register, watch, handleSubmit, formState: { errors } } = useForm<LoginFormData>();
+    const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
