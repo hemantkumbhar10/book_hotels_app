@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { check, validationResult } from 'express-validator';
-import User from '../models/user';
+import User from '../models/user.model';
 import jwt from 'jsonwebtoken';
 import verifyToken from '../middlewares/auth.middleware';
 

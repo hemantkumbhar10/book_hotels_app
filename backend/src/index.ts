@@ -5,6 +5,7 @@ import "dotenv/config";
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/users.routes';
+import myHotelRoute from './routes/my-hotels';
 import path from 'path';
 import { v2 as cloudinary } from 'cloudinary';
 
@@ -62,6 +63,9 @@ app.use('/api/auth', authRoutes);
 
 //REGISTER USER ROUTES
 app.use('/api/users', userRoutes);
+
+//CRUD HOTELS ROUTES
+app.use('/api/myhotels', myHotelRoute);
 
 //START SERVER
 app.listen(8080, ()=>{
