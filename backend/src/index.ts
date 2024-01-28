@@ -12,9 +12,9 @@ import { v2 as cloudinary } from 'cloudinary';
 
 
 cloudinary.config({
-    cloud_name:process.env.CLOUDINARY_CLOUD_NAME,
-    api_key:process.env.CLOUDINARY_API_KEY,
-    api_secret:process.env.CLOUDINARY_API_SECRET,
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
 
@@ -46,12 +46,12 @@ app.use(cors(
     //ACCEPT API REQUESTS FROM ONLY SPECIFIED ORIGIN URL WITH CREDENTIALS(COOKIES) ALLOWED(true)
     {
         origin: process.env.FRONTEND_URL,
-        credentials:true,
+        credentials: true,
     }
 ));
 
 //SERVES STATIC FILES GENREATED IN FRONTEND THROUGH BACKEND
-app.use(express.static(path.join(__dirname,'../../frontend/dist')));
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
 
 //TEST ROUTE CONTROLLER
 // app.get('/api/test', async (req: Request, res: Response) => {
@@ -67,8 +67,15 @@ app.use('/api/users', userRoutes);
 //CRUD HOTELS ROUTES
 app.use('/api/myhotels', myHotelRoute);
 
+
+//HIDEN ROUTES ARE ALSO HIDDEN FROM STATIC FILES SO WE TELLING THAT ANY OTHER ROUTE(IT MAY BE HIDDEN OR WRONG ONE)
+//MUST BE DIRECTED TO frontend/dist/index.html WHERE ALL SECURE ROUTES ARE HANDLED BY REACT_ROUTER_DOM
+app.get("*", (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+})
+
 //START SERVER
-app.listen(8080, ()=>{
+app.listen(8080, () => {
     console.log('Server is successfully running on port: 8080');
 })
 
