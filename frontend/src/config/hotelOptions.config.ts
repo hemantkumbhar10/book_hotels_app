@@ -3,12 +3,11 @@ export const hotelTypesData = [
     "Airport",
     "Suite",
     "Resort",
-    "Bed and Breakfast",
+    "BednBreakfast",
     "Timeshare",
     "Casino",
     "Holiday Resort",
-    "Health Farm and Sanatorium",
-    "Floating",
+    "Health Farm",
     "Floating",
     "Boutique",
     "Family",
@@ -16,5 +15,22 @@ export const hotelTypesData = [
     "Hut",
     "All Inclusive",
     "Pet Friendly",
+]
+
+export const hotelFacilitiesData = [
+    "Free WiFi",
+    "Gym",
+    "Swimming Pool",
+    "Restaurant",
     "Bar",
+    "Spa",
+    "Conference Rooms",
+    "Parking",
+    "24/7 Reception",
+    "Room Service",
+    "Laundry Service",
+    "Air Conditioning",
+    "Non-smoking Rooms",
+    "Pet-friendly",
+    "Airport Shuttle"
 ]

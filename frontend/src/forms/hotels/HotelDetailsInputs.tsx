@@ -22,7 +22,7 @@ const HotelDetailsInputs = () => {
 
 
             <div className="flex flex-col gap-4 md:flex-row">
-                <label className='text-gray-700 text-sm font-bold'>
+                <label className='text-gray-700 text-sm font-bold w-full'>
                     City
                     <input className='border rounded w-full py-1 px-2 font-normal'
                         type='text'
@@ -32,7 +32,7 @@ const HotelDetailsInputs = () => {
                         <span className='text-red-500 text-xs'>{errors.city?.message}</span>
                     )}
                 </label>
-                <label className='text-gray-700 text-sm font-bold'>
+                <label className='text-gray-700 text-sm font-bold w-full'>
                     Country
                     <input className='border rounded w-full py-1 px-2 font-normal'
                         type='text'
@@ -48,7 +48,7 @@ const HotelDetailsInputs = () => {
                 Description
                 <textarea className='border rounded w-full py-1 px-2 font-normal'
                     {...register("description", { required: "Description is required!" })}
-                    rows={10}
+                    rows={7}
                 />
                 {errors.description && (
                     <span className='text-red-500 text-xs'>{errors.description?.message}</span>
@@ -58,7 +58,7 @@ const HotelDetailsInputs = () => {
 
             <div className="flex flex-col gap-4 md:flex-row">
                 <label className='text-gray-700 text-sm font-bold w-full'>
-                    Price/Night
+                    Price/Night (INR)
                     <input className='border rounded w-full py-1 px-2 font-normal'
                         type="number"
                         {...register("pricePerNight", { required: "Price is required!" })}

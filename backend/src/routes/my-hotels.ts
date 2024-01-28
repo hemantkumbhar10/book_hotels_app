@@ -1,12 +1,20 @@
 import express, { Request, Response } from 'express';
-import { upload, uploadMultipleImages } from '../middlewares/cloudinary.middleware';
+import { uploadMultipleImages } from '../middlewares/cloudinary.middleware';
 import Hotel, { HotelType } from '../models/hotel.model';
 import verifyToken from '../middlewares/auth.middleware';
 import { body } from 'express-validator';
+import multer from 'multer';
 
 const router = express.Router();
 
+const memory_Storage = multer.memoryStorage();
 
+export const upload = multer({
+    storage: memory_Storage,
+    limits: {
+        fileSize: 5 * 1024 * 1024  //5MB
+    }
+})
 
 //upload.array("hotelImages", 6) RECIEVE IMAGE ARRAY WITH MAX LIMIT OF 6 IMAGES
 
@@ -30,19 +38,19 @@ router.post(
 
     //UPLOAD IMAGES TO MEMORY_STORAGE FIRST
     upload.array("hotelImages", 6),
+    //6.49.39
 
     //CONTROLER
     async (req: Request, res: Response) => {
-
         try {
             const hotelImages = req.files as Express.Multer.File[];
-            const newHotel: HotelType = req.body;
 
+            const newHotel: HotelType = req.body;
             //UPLOADING IMAGES TO CLOUDINARY AND GETTING ARRAY OF URLS
-            const images = await uploadMultipleImages(hotelImages);
-            newHotel.imageUrls = images;
+            const imageUrls = await uploadMultipleImages(hotelImages);
+            newHotel.imageUrls = imageUrls;
             newHotel.lastUpdated = new Date();
-            newHotel.userId = req.userID;
+            newHotel.userID = req.userID;
 
             const hotel = new Hotel(newHotel);
             await hotel.save();

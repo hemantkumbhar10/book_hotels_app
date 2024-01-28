@@ -32,7 +32,7 @@ check('password', "Password is required!").isLength({ min: 6 })
             return res.status(400).send({ message: "Invalid Credentials!" });
         }
 
-        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string,
+        const token = jwt.sign({ userID: user.id }, process.env.JWT_SECRET as string,
             { expiresIn: '1D' });
 
         res.cookie('auth_token', token, {
@@ -41,7 +41,7 @@ check('password', "Password is required!").isLength({ min: 6 })
             maxAge: 86400000,
         })
 
-        return res.status(200).send({ userId: user._id });
+        return res.status(200).send({ userID: user._id });
 
 
     } catch (e) {
@@ -53,7 +53,7 @@ check('password', "Password is required!").isLength({ min: 6 })
 
 router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
     //VALIDATE TOKEN
-    res.status(200).send({ userId: req.userID });
+    res.status(200).send({ userID: req.userID });
 })
 
 router.post("/sign-out", (req: Request, res: Response) => {

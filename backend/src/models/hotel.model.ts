@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 export type HotelType = {
     _id: string;
-    userId: string;
+    userID: string;
     name: string;
     city: string;
     country: string;
@@ -21,7 +21,7 @@ export type HotelType = {
 
 
 const hotelSchema = new mongoose.Schema<HotelType>({
-    userId: {
+    userID: {
         type: String,
         required: true,
     },
