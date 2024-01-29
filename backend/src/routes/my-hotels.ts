@@ -63,4 +63,8 @@ router.post(
     }
 );
 
+router.get('/', verifyToken, async(req:Request, res:Response)=>{
+    const hotels = await Hotel.find({userID:req.userID});
+})
+
 export default router;
