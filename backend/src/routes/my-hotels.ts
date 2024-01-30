@@ -74,3 +74,16 @@ router.get('/', verifyToken, async (req: Request, res: Response) => {
 })
 
 export default router;
+
+router.get('/:id', verifyToken, async (req: Request, res: Response) => {
+
+    const hotelId = req.params.id.toString();
+
+    try {
+        const hotel = await Hotel.findOne({ _id: hotelId, userID: req.userID });
+
+        res.status(201).json(hotel);
+    } catch (error) {
+        res.status(500).json({ message: "Error Fetching hotel!" })
+    }
+})
