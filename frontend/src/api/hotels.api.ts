@@ -1,4 +1,4 @@
-
+import { HotelType } from '../../../backend/src/models/hotel.model';
 
 
 const BASE_BACKEND_API_URL = import.meta.env.VITE_BASE_BACKEND_API_URL || "";
@@ -13,6 +13,17 @@ export const createNewHotel = async (hotelFormData: FormData) => {
 
     if (!response.ok) {
         throw new Error("Failed to create hotel!");
+    }
+
+    return response.json();
+}
+
+export const getHotels = async (): Promise<HotelType[]> => {
+    const response = await fetch(`${BASE_BACKEND_API_URL}/api/myhotels`, {
+        credentials: 'include',
+    })
+    if (!response.ok) {
+        throw new Error("Error getting hotels!")
     }
 
     return response.json();

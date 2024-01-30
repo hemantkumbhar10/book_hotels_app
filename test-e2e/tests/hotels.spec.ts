@@ -13,7 +13,6 @@ test.beforeEach(async ({ page }) => {
     //"heading"--> h1-h6 tags
     //CHECKING IF LOGIN LINK BUTTON SUCCESFULLY DIRECTED TO LOGIN PAGE
     await expect(page.getByRole("heading", { name: "Login" })).toBeVisible();
-a
     //FLOODING EMAIL FIELD OF LOGIN PAGE
     await page.locator("[name=email]").fill("test@email.com");
 
@@ -55,6 +54,25 @@ test("should allow user to create new hotel", async ({ page }) => {
 
     await page.getByRole('button', { name: "Create Hotel" }).click();
     await expect(page.getByText("New Hotel Created!")).toBeVisible();
+
+
+})
+
+test("should display hotels", async ({ page }) => {
+    await page.goto(`${FRONTEND_URL}/my-hotels`);
+
+    await expect(page.getByRole("heading", { name: "My Hotels" })).toBeVisible();
+
+    await expect(page.getByText("Test Hotel name")).toBeVisible();
+    await expect(page.getByText("Test description")).toBeVisible();
+    await expect(page.getByText("Test city, Test country")).toBeVisible();
+    await expect(page.getByText("Holiday Resort")).toBeVisible();
+    await expect(page.getByText("₹ 400 per night")).toBeVisible();
+    await expect(page.getByText("2 adults, 1 children")).toBeVisible();
+    await expect(page.getByText("4", { exact: true })).toBeVisible();
+
+    await expect(page.getByRole("link", { name: 'Edit Hotel' })).toBeVisible();
+    await expect(page.getByRole("link", { name: 'Create Hotel' })).toBeVisible();
 
 
 })
