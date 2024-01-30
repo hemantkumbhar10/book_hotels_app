@@ -1,4 +1,4 @@
-import { HotelType } from '../../../backend/src/models/hotel.model';
+import {HotelType} from '../../../backend/src/shared/types';
 
 
 const BASE_BACKEND_API_URL = import.meta.env.VITE_BASE_BACKEND_API_URL || "";

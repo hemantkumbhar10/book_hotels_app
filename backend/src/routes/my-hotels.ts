@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import { uploadMultipleImages } from '../middlewares/cloudinary.middleware';
-import Hotel, { HotelType } from '../models/hotel.model';
+import Hotel from '../models/hotel.model';
+import { HotelType } from '../shared/types';
 import verifyToken from '../middlewares/auth.middleware';
 import { body } from 'express-validator';
 import multer from 'multer';
