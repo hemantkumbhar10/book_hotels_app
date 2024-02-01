@@ -30,7 +30,7 @@ test('should allow user to login', async ({ page }) => {
   await expect(page.getByRole("button", { name: "Log out" })).toBeVisible();
   //CHECKING IF SECURE LINKS ARE VISIBLE
   await expect(page.getByRole("link", { name: "Reservations" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Favourites" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "My Hotels" })).toBeVisible();
 
 });
 
@@ -65,7 +65,7 @@ test("should allow user to sign up", async ({ page }) => {
   await expect(page.getByText("You have registered successfully!")).toBeVisible();
   await expect(page.getByRole("button", { name: "Log out" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Reservations" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Favourites" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "my Hotels" })).toBeVisible();
 
 
 })

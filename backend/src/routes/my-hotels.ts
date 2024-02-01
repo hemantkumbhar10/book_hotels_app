@@ -87,3 +87,30 @@ router.get('/:id', verifyToken, async (req: Request, res: Response) => {
         res.status(500).json({ message: "Error Fetching hotel!" })
     }
 })
+
+router.put('/:id', verifyToken, upload.array("hotelImages"), async (req: Request, res: Response) => {
+    const hotelId = req.params.id.toString();
+
+    try {
+        const editedHotel: HotelType = req.body;
+        editedHotel.lastUpdated = new Date();
+
+        const hotel = await Hotel.findByIdAndUpdate({ _id: hotelId, userI: req.userID }, editedHotel, { new: true });
+
+        if (!hotel) {
+            return res.status(404).json({ message: "Hotel does not exists!" });
+        }
+
+        const editedImages = req.files as Express.Multer.File[];
+        const editedImageUrls = await uploadMultipleImages(editedImages);
+
+
+        hotel.imageUrls = [...editedImageUrls, ...(editedHotel.imageUrls || [])]
+        await hotel.save();
+        res.status(201).json(hotel);
+
+
+    } catch (err) {
+        res.status(500).json({ message: "Somethinbg went wrong!" });
+    }
+})

@@ -63,16 +63,73 @@ test("should display hotels", async ({ page }) => {
 
     await expect(page.getByRole("heading", { name: "My Hotels" })).toBeVisible();
 
-    await expect(page.getByText("Test Hotel name")).toBeVisible();
-    await expect(page.getByText("Test description")).toBeVisible();
-    await expect(page.getByText("Test city, Test country")).toBeVisible();
-    await expect(page.getByText("Holiday Resort")).toBeVisible();
-    await expect(page.getByText("₹ 400 per night")).toBeVisible();
-    await expect(page.getByText("2 adults, 1 children")).toBeVisible();
-    await expect(page.getByText("4", { exact: true })).toBeVisible();
+    await expect(page.getByText("Test Hotel name").first()).toBeVisible();
+    await expect(page.getByText("Test description").first()).toBeVisible();
+    await expect(page.getByText("Test city, Test country").first()).toBeVisible();
+    await expect(page.getByText("Holiday Resort").first()).toBeVisible();
+    await expect(page.getByText("₹ 400 per night").first()).toBeVisible();
+    await expect(page.getByText("2 adults, 1 children").first()).toBeVisible();
+    await expect(page.getByText("4", { exact: true }).first()).toBeVisible();
 
-    await expect(page.getByRole("link", { name: 'Edit Hotel' })).toBeVisible();
+    await expect(page.getByRole("link", { name: 'Edit Hotel' }).first()).toBeVisible();
     await expect(page.getByRole("link", { name: 'Create Hotel' })).toBeVisible();
-
-
 })
+
+test("should allow user to edit hotel", async ({ page }) => {
+    await page.goto(`${FRONTEND_URL}/my-hotels`);
+    await expect(page.getByRole("heading", { name: "My Hotels" })).toBeVisible();
+
+    await page.getByRole('link', { name: 'Edit Hotel' }).first().click();
+
+    //WAITS FOR PAGE UNTIL DOM LOADS SPECIFIED SELECTOR
+    await page.waitForSelector('[name="name"]', { state: "attached" });
+
+    await expect(page.locator('[name="name"]')).toHaveValue('Test Hotel name');
+
+    await page.locator("[name=name]").fill("Test Hotel name edited");
+    await page.locator("[name=city]").fill("Test city Edited");
+    await page.locator("[name=country]").fill("Test country Edited");
+    await page.locator("[name=description]").fill("Edited Test description goees bla bla bla for hotel here..");
+    await page.locator("[name=starRating]").fill("5");
+    await page.locator("[name=pricePerNight]").fill("4000");
+
+    await page.getByText("Casino").click();
+    await page.getByLabel("Restaurant").uncheck();
+
+    await page.locator("[name=adultCount]").fill("3");
+    await page.locator("[name=childrenCount]").fill("2");
+    /////////////////////////////////////////////////////////////////////////
+
+    await page.getByRole('button', { name: "Update Hotel" }).click();
+    await expect(page.getByText('Hotel Updated Successfully!')).toBeVisible();
+
+    await page.reload();
+    await expect(page.locator('[name="name"]')).toHaveValue("Test Hotel name edited");
+    await expect(page.locator("[name=city]")).toHaveValue("Test city Edited");
+    await expect(page.locator("[name=country]")).toHaveValue("Test country Edited");
+    await expect(page.locator("[name=description]")).toHaveValue("Edited Test description goees bla bla bla for hotel here..");
+    await expect(page.locator("[name=starRating]")).toHaveValue("5");
+    await expect(page.locator("[name=pricePerNight]")).toHaveValue("4000");
+    await expect(page.getByText('Casino')).toBeChecked();
+    const check = await page.getByText("Restaurant").isChecked();
+    await expect(check).toBeFalsy();
+
+
+
+    /////////////////////////////////////////////////////////////////////////
+    await page.locator("[name=name]").fill("Test Hotel name");
+    await page.locator("[name=city]").fill("Test city");
+    await page.locator("[name=country]").fill("Test country");
+    await page.locator("[name=description]").fill("Test description goees bla bla bla for hotel here..");
+    await page.locator("[name=starRating]").fill("4");
+    await page.locator("[name=pricePerNight]").fill("400");
+
+    await page.getByText("Holiday Resort").check();
+
+    await page.locator("[name=adultCount]").fill("2");
+    await page.locator("[name=childrenCount]").fill("1");
+    await page.getByRole('button', { name: "Update Hotel" }).click();
+
+});
+
+
