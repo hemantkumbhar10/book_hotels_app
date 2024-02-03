@@ -1,7 +1,7 @@
 
 [
     {
-      "name": "Elegant City Suites",
+      "name": "Elegant City Suites", //////////////////////////
       "city": "Delhi",
       "country": "India",
       "description": "Modern suites in the heart of Delhi.",
@@ -14,8 +14,8 @@
       "imageUrls": ["https://example.com/hotel1/image1.jpg", "https://example.com/hotel1/image2.jpg"]
     },
     {
-      "name": "Taj Mahal View Resort",
-      "city": "Agra",
+      "name": "Taj Mahal View Resort",  //////////////////////////
+      "city": "Goa",
       "country": "India",
       "description": "Luxury resort with a view of the Taj Mahal.",
       "type": "Resort",
@@ -27,7 +27,7 @@
       "imageUrls": ["https://example.com/hotel2/image1.jpg", "https://example.com/hotel2/image2.jpg"]
     },
     {
-      "name": "Beachfront Bliss Hotel",
+      "name": "Beachfront Bliss Hotel", //////////////////////////
       "city": "Goa",
       "country": "India",
       "description": "Enjoy the sun and sand in this beachfront hotel.",
@@ -40,7 +40,7 @@
       "imageUrls": ["https://example.com/hotel3/image1.jpg", "https://example.com/hotel3/image2.jpg"]
     },
     {
-      "name": "Serene Hillside Retreat",
+      "name": "Serene Hillside Retreat", //////////////////////////
       "city": "Shimla",
       "country": "India",
       "description": "Escape to the hills for a peaceful retreat.",
@@ -53,7 +53,7 @@
       "imageUrls": ["https://example.com/hotel4/image1.jpg", "https://example.com/hotel4/image2.jpg"]
     },
     {
-      "name": "Urban Boutique Hotel",
+      "name": "Urban Boutique Hotel", //////////////////////////
       "city": "Mumbai",
       "country": "India",
       "description": "Chic and stylish boutique hotel in the bustling city.",
@@ -66,7 +66,7 @@
       "imageUrls": ["https://example.com/hotel5/image1.jpg", "https://example.com/hotel5/image2.jpg"]
     },
     {
-      "name": "Tranquil Lakeview Retreat",
+      "name": "Tranquil Lakeview Retreat",  //////////////////////////
       "city": "Udaipur",
       "country": "India",
       "description": "Relax by the lake in this peaceful retreat.",
@@ -79,7 +79,7 @@
       "imageUrls": ["https://example.com/hotel6/image1.jpg", "https://example.com/hotel6/image2.jpg"]
     },
     {
-      "name": "Historic Heritage Hotel",
+      "name": "Historic Heritage Hotel", //////////////////////////
       "city": "Jaipur",
       "country": "India",
       "description": "Experience the charm of history in this heritage hotel.",
@@ -92,7 +92,7 @@
       "imageUrls": ["https://example.com/hotel7/image1.jpg", "https://example.com/hotel7/image2.jpg"]
     },
     {
-      "name": "Lakeside Paradise Resort",
+      "name": "Lakeside Paradise Resort", //////////////////////////
       "city": "Kochi",
       "country": "India",
       "description": "Escape to a tropical paradise by the lake.",
@@ -105,7 +105,7 @@
       "imageUrls": ["https://example.com/hotel8/image1.jpg", "https://example.com/hotel8/image2.jpg"]
     },
     {
-      "name": "Business Hub Suites",
+      "name": "Business Hub Suites", //////////////////////////
       "city": "Bangalore",
       "country": "India",
       "description": "Ideal for business travelers in the tech hub.",
@@ -157,7 +157,7 @@
       "imageUrls": ["https://example.com/hotel12/image1.jpg", "https://example.com/hotel12/image2.jpg"]
     },
     {
-      "name": "Coastal Paradise Hut",
+      "name": "Coastal Paradise Hut", //////////////////////////
       "city": "Varkala",
       "country": "India",
       "description": "Experience coastal living in cozy huts.",
