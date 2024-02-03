@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { HotelType } from "../shared/types";
+import { bookingSchema } from "./booking.model";
 
 
 
@@ -60,6 +61,7 @@ const hotelSchema = new mongoose.Schema<HotelType>({
         type: Date,
         required: true,
     },
+    bookings: [bookingSchema]
 
 });
 
