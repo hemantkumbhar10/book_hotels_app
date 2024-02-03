@@ -21,3 +21,15 @@ test("should show hotel search results", async ({ page }) => {
     await expect(page.getByText("Hotels found in Test City")).toBeVisible();
     await expect(page.getByText("Test Hotel name").first()).toBeVisible();
 })
+
+
+
+test('should show hotel details', async ({ page }) => {
+    page.goto(FRONTEND_URL);
+    await page.getByPlaceholder('Search the best!').fill("Test city");
+    await page.getByRole('button', { name: "Search" }).click();
+    await page.getByText("Test Hotel name").first().click();
+    await expect(page).toHaveURL(/detail/);
+    await expect(page.getByRole('button', { name: 'Book Now' })).toBeVisible();
+
+})

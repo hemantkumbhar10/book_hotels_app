@@ -8,6 +8,7 @@ import AddNewHotel from './pages/AddNewHotel'
 import MyHotels from './pages/MyHotel'
 import EditHotel from './pages/EditHotel'
 import Search from './pages/Search'
+import HotelDetails from './pages/HotelDetails'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout><p>HomePage</p></Layout>} />
         <Route path='/search' element={<Layout><Search /></Layout>} />
+        <Route path='/detail/:hotelId' element={<Layout><HotelDetails /></Layout>} />
         <Route path='/register' element={<Layout><Register /></Layout>} />
         <Route path='/sign-in' element={<Layout><Login /></Layout>} />
 
