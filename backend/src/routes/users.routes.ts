@@ -2,10 +2,28 @@ import express, { Request, Response } from 'express';
 import User from '../models/user.model';
 import jwt from 'jsonwebtoken';
 import { check, validationResult } from 'express-validator';
+import verifyToken from '../middlewares/auth.middleware';
 
 
 //ROUTER FUNCTION TO REGISTER ROUTES FOR CONTROLLERS
 const router = express.Router();
+
+router.get('/me', verifyToken, async (req: Request, res: Response) => {
+    const userID = req.userID;
+
+    try {
+        //DOES NOT INCLUDE PASSWORD FIELD
+        const user = await User.findById(userID).select("-password");
+        if (!user) {
+            return res.status(400).json({ message: "User not found!" })
+        }
+        res.status(200).json(user);
+
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({ messge: 'Something went wrong!' })
+    }
+})
 
 
 router.post("/register",
@@ -43,7 +61,7 @@ router.post("/register",
                 secure: process.env.NODE_ENV === "production",
                 maxAge: 86400000
             })
-            return res.status(200).send({message:"User registered successfully!"});
+            return res.status(200).send({ message: "User registered successfully!" });
 
         } catch (e) {
             console.log(e);
