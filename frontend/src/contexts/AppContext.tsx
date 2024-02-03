@@ -2,7 +2,10 @@ import React, { useState, createContext, useContext } from 'react';
 import ToastMessage from '../components/ToastMessage';
 import { useQuery } from 'react-query';
 import * as user from '../api/user.api';
+import { loadStripe, Stripe } from '@stripe/stripe-js';
 
+
+const STRIPE_PUB_KEY = import.meta.env.VITE_STRIPE_PUBLIC_KEY || "";
 
 type ToastMessageData = {
     message: string;
@@ -12,7 +15,8 @@ type ToastMessageData = {
 //TYPE FOR FUNCTION WHICH TAKES MESSAGE_DATA IF THE TOAST HAS TO BE SHOWN
 type AppContextData = {
     showToast: (toastMessage: ToastMessageData) => void;
-    isLoggedIn : boolean;
+    isLoggedIn: boolean;
+    stripePromise: Promise<Stripe | null>;
 }
 
 type ProviderData = {
@@ -23,6 +27,9 @@ type ProviderData = {
 //UNDEFINED IF WE HAVE TO RESET IT
 const context = createContext<AppContextData | undefined>(undefined);
 
+//LOADS STRIPE AS SOON AS FRONTEND STARTS
+const stripePromise = loadStripe(STRIPE_PUB_KEY);
+
 //PROVIDER PROVIDING SHOW TOAST FUNCTION
 const AppContextProvider = ({ children }: ProviderData) => {
 
@@ -31,21 +38,22 @@ const AppContextProvider = ({ children }: ProviderData) => {
 
     //VALIDATE TOKEN AND RETURNS BOOLEAN BASED ON STATUS 200 OR 401/404/etc.
     //CREATES QUERY WITH KEY validateToken
-    const {isError} = useQuery("validateToken", user.validateToken, {
-        retry:false,
+    const { isError } = useQuery("validateToken", user.validateToken, {
+        retry: false,
     })
 
     return (
-        <context.Provider 
-        //TO PROVIDE CURRENT CONTEXT VALUE TO CHILDRENS
-        value={{
-            //VALUE (STATE OF PROVIDER) is SET WHEN showToast EXECUTED BY HOOK
-            showToast: (toastMessage) => {
-                setMessageToast(toastMessage);
-            },
-            //PASSES CURRENT VALUE OF IS_ERROR 
-            isLoggedIn:!isError,
-        }}>
+        <context.Provider
+            //TO PROVIDE CURRENT CONTEXT VALUE TO CHILDRENS
+            value={{
+                //VALUE (STATE OF PROVIDER) is SET WHEN showToast EXECUTED BY HOOK
+                showToast: (toastMessage) => {
+                    setMessageToast(toastMessage);
+                },
+                //PASSES CURRENT VALUE OF IS_ERROR 
+                isLoggedIn: !isError,
+                stripePromise,
+            }}>
             {messageToast &&
                 (<ToastMessage
                     message={messageToast.message}
@@ -74,7 +82,7 @@ export default AppContextProvider;
 //1. CREATED CONTEXT using createContext(), DEFINED EXACTLY WHICH DATA IT TAKES
 //2.PROVIDER JSX
 //  1.STATE WHICH STORES TOAST MESSAGE
-//  2.PASSES DOWN showToast FUNCTION TO ITS CHILDREN 
+//  2.PASSES DOWN showToast FUNCTION TO ITS CHILDREN
 //3. IN REGISTRATION FORM WE NEED TO USE TOAST ON SUCCESS OR ERROR
 //4. HENCE WE HAVE TO useContext() to ACCESS PROVIDER VALUES
 //5. i.e WE CREATED HOOK WHICH IMPLEMENTS THIS HOOK AND RETURNS CONTEXT VALUE

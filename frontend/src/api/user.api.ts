@@ -1,9 +1,22 @@
 import { RegistrationFormData } from "../pages/Register"
 import { LoginFormData } from "../pages/Login";
+import { UserType } from "../../../backend/src/shared/types";
 
 //AFTER BUNDLING FRONTEND AND BACKEND THERE WONT BE SEPARATE URLS 
 //HENCE  BY SPECIFFYING EMPTY STRING, WE SAYING USE SAME URL FOR BACKEND AS WELL
 const BASE_BACKEND_API_URL = import.meta.env.VITE_BASE_BACKEND_API_URL || "";
+
+
+export const getCurrentUser = async (): Promise<UserType> => {
+    const response = await fetch(`${BASE_BACKEND_API_URL}/api/users/me`, {
+        credentials: 'include',
+    })
+
+    if (!response.ok) {
+        throw new Error("Could not fetch user!!");
+    }
+    return response.json();
+}
 
 
 export const Register = async (formData: RegistrationFormData) => {
