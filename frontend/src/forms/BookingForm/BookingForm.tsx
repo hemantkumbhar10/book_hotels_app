@@ -141,7 +141,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
             </div>
             <div className="flex flex-end">
                 <button
-                    disabled={!isLoading}
+                    disabled={isLoading}
                     type='submit'
                     className='text-sm bg-purple-500 text-white p-2 font-bold hover:bg-purple-400 rounded-md px-8 disabled:bg-gray-400'
                 >
