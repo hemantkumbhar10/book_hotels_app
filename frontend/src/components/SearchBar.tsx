@@ -24,9 +24,9 @@ const SearchBox = () => {
         navigate("/search");
     };
 
-   
 
-    
+
+
 
     const minDate = new Date();
     const maxDate = new Date();
@@ -51,7 +51,7 @@ const SearchBox = () => {
 
             <div className="w-auto flex flex-row items-center flex-1 bg-white p-2
                             bg-white-300 opacity-95 rounded-xl
-                            shadow-inner backdrop-blur-sm ">
+                            ">
                 <label className="items-center flex">
                     Adults:
                     <input type="number"
@@ -69,12 +69,9 @@ const SearchBox = () => {
                     />
                 </label>
             </div>
-            <div className="w-auto flex flex-row items-center flex-1 bg-white px-2
-                            bg-white-300 opacity-95 rounded-xl
-                            shadow-inner backdrop-blur-sm">
+            <div >
                 <DatePicker selected={checkIn}
                     calendarClassName="bg-gray-100 rounded-xl border-none"
-                    wrapperClassName="min-w-full"
                     onChange={(date) => setCheckIn(date as Date)}
                     selectsStart
                     startDate={checkIn}
@@ -82,15 +79,12 @@ const SearchBox = () => {
                     minDate={minDate}
                     maxDate={maxDate}
                     placeholderText="Check-in Date"
-                    className="min-w-full bg-white p-2 focus:outline-none "
+                    className=" bg-white p-2 focus:outline-none container rounded-xl"
                 />
             </div>
-            <div className="w-auto flex flex-row items-center flex-1 bg-white px-2
-                            bg-white-300 opacity-95 rounded-xl
-                            shadow-inner backdrop-blur-sm">
+            <div >
                 <DatePicker selected={checkOut}
-                    calendarClassName="bg-gray-100 rounded-xl border-none"
-                    wrapperClassName="min-w-full"
+                    calendarClassName="bg-gray-100 rounded-xl border-none overflow-none"
                     onChange={(date) => setCheckOut(date as Date)}
                     selectsStart
                     startDate={checkIn}
@@ -98,7 +92,7 @@ const SearchBox = () => {
                     minDate={minDate}
                     maxDate={maxDate}
                     placeholderText="Check-out Date"
-                    className="min-w-full bg-white p-2 focus:outline-none "
+                    className=" bg-white p-2 focus:outline-none container rounded-xl"
                 />
             </div>
             <div className="flex gap-1">

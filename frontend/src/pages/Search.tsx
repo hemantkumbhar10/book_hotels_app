@@ -20,6 +20,7 @@ const Search = () => {
     const [selectedFacility, setSelectedFacility] = useState<string[]>([]);
     const [maxPrice, setMaxPrice] = useState<number | undefined>();
     const [sortOption, setSortOption] = useState<string>("");
+    const [isFiltersOpen, setIsFiltersOpen] = useState(false);
     const searchParams = {
         destination: search.destination,
         adultCount: search.adultCount.toString(),
@@ -69,10 +70,16 @@ const Search = () => {
                 : prevFacility.filter((facility) => facility !== hotelFacility));
     }
 
+    const handleFiltersPopper = () => {
+        setIsFiltersOpen(!isFiltersOpen);
+    }
+
 
     return (<>
         <div className="container grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
-            <div className="rounded-xl border border-purple-300 p-5 h-fit sticky top-10">
+
+            <button onClick={handleFiltersPopper} className=" lg:hidden border border-purple-300 p-3 text-sm">Filters</button>
+            <div className={`${isFiltersOpen ? 'flex' : 'hidden'} lg:flex rounded-xl border border-purple-300 p-5 h-fit lg:sticky top-10 flex-col bg-white lg:bg-transparent`}>
                 <div className="space-y-5">
                     <h3 className="text-lg font-semifold border-b border-purple-300 pb-5">Filter by:</h3>
                     {/* TODO FILTERS */}
@@ -81,6 +88,7 @@ const Search = () => {
                     <FacilitiesFilter selectedFacilities={selectedFacility} onChange={hotelFacilityChangeHandler} />
                     <PriceFilter selectedPrice={maxPrice} onChange={(value?: number) => setMaxPrice(value)} />
                 </div>
+                <button onClick={handleFiltersPopper} className=" lg:hidden border border-purple-300 p-3 text-sm">Close</button>
             </div>
             <div className="flex flex-col gap-5">
                 <div className="flex justify-between items-center">
