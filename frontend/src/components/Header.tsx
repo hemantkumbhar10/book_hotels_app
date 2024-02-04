@@ -16,7 +16,7 @@ const Header = () => {
                     {
                         isLoggedIn ? (
                             <>
-                                <Link className='flex items-center rounded-md text-white px-3 font-bold hover:bg-gray-100 hover:text-purple-500 hover:scale-105 transition ease-linear duration-100' to='/reservations'>Reservations</Link>
+                                <Link className='flex items-center rounded-md text-white px-3 font-bold hover:bg-gray-100 hover:text-purple-500 hover:scale-105 transition ease-linear duration-100' to='my-bookings'>Reservations</Link>
                                 <Link className='flex items-center rounded-md text-white px-3 font-bold hover:bg-gray-100 hover:text-purple-500 hover:scale-105 transition ease-linear duration-100'  to='/my-hotels'>My Hotels</Link>
                                 <Logout />
                             </>

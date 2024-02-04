@@ -9,6 +9,7 @@ import myHotelRoute from './routes/my-hotels';
 import searchRoutes from './routes/search.routes';
 import hotelRoute from './routes/hotel';
 import bookingRoutes from './routes/payments.routes';
+import myBookingsRoutes from './routes/my-bookings.routes';
 import path from 'path';
 import { v2 as cloudinary } from 'cloudinary';
 
@@ -78,6 +79,9 @@ app.use('/api/hotel', hotelRoute);
 
 //BOOK HOTEL
 app.use('/api/reservations', bookingRoutes);
+
+//ALL MY BOOKINGS
+app.use('/api/my-bookings', myBookingsRoutes);
 
 
 //HIDEN ROUTES ARE ALSO HIDDEN FROM STATIC FILES SO WE TELLING THAT ANY OTHER ROUTE(IT MAY BE HIDDEN OR WRONG ONE)
